@@ -115,3 +115,23 @@ nombre_array = new tipo_dato[tamanio];
 int [] numeros = {1,2,3,4,6};
 String [] nombre = new String[3];
 ```
+
+- Valvulas X4
+- Arbol de levas
+- Piñon de distribucion
+- Empaque cilindro, culata, culatin
+- Resorte de valvulas (X1)
+- Si es posible cadenilla(un poco estirada).
+
+## Areglos y matrices.
+## POO
+1. Conceptos: Diagrama de clase,
+2. Las clases deben iniciar en mayuscula y cxrear desde JAVA PROJECTS
+3. herencia, polimorfismo, adstraccion.
+4. source Action -> Generate constructors
+
+## ArrayList
+1. Crear un arrayList
+```
+ArrayList<T> nombreArrayList = new ArrayList<T>();
+```
