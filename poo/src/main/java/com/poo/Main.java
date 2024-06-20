@@ -9,7 +9,7 @@ public class Main {
     // //public int suma(int a, int b) {
     // public static int suma(int a, int b) {
     //     return a+b;
-    // }
+    // }    
 
     // Cree un objeto de la clase Estudiante
     public static void main(String[] args) {
