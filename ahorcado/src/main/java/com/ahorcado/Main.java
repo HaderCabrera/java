@@ -10,7 +10,7 @@ public class Main {
     public static void main(String[] args) {
         // Declaracion de variables
         boolean flag = true;
-        int vidas = 3;
+        //int vidas = 3;
         boolean dead = true;
         String pala = "";
 
@@ -25,7 +25,7 @@ public class Main {
         letters.add("ArrayList");
         letters.add("String");
         letters.add("Ejemplo");
-        letters.add("Programación");
+        letters.add("Programacion");
         letters.add("Desarrollo");
         letters.add("OpenAI");
         letters.add("ChatGPT");
@@ -42,37 +42,51 @@ public class Main {
             String select = "" + opcion;
             switch (select) {
                 case "jugar":
+                    // Moviendo varables para que pueda seguir jugando
+                    int vidas = 3;
+
                     //Eleginar palabra aleatoria del array
                     Random rand = new Random();
                     int indiceAleatorio = rand.nextInt(letters.size());
                     String palabraAleatoria = letters.get(indiceAleatorio);
                     System.out.println(palabraAleatoria);
-                    drawMessage(palabraAleatoria, vidas);
-
+                    // MENSAJE INICIAL
+                    String mensaje = "";
+                    for(int i = 0; i < palabraAleatoria.length(); i++ ) {
+                        mensaje += "__" + " "; 
+                    }
+                    JOptionPane.showMessageDialog(null, MessageFormat.format("Guess: {0}    Vidas: {1}",mensaje, vidas));
+                    // BUSQUEDA DE LETRAS
                     do {
                         String letter = getLetter();
                         boolean exists = buscarLetra(letter, palabraAleatoria);
                         if (!exists) {
                             vidas --;
-                            JOptionPane.showMessageDialog(null, MessageFormat.format("Has perdido una vida.Vidas: {0}",vidas));
+                            JOptionPane.showMessageDialog(null, "¡Has perdido una vida!");
+                            System.out.println(lett);
+                            drawMessage(palabraAleatoria, vidas, lett);
                             if (vidas < 1){
-                                JOptionPane.showMessageDialog(null, "No te quedan mas vidad, try again");
-                                dead = false;
+                                JOptionPane.showMessageDialog(null, "No te quedan mas vidas, try again!");
+                                lett.clear();
+                                //dead = false;
+                                break;
                             }
                         } else {
                             String palabraAleatoriaa = palabraAleatoria.toLowerCase();
                             String letterr = letter.toLowerCase();
                                 if(palabraAleatoriaa.contains(letterr)) {
                                     lett.add(letterr);
-                                    JOptionPane.showMessageDialog(null, MessageFormat.format("letras correctas: {0}", lett));
+                                    drawMessage(palabraAleatoria, vidas, lett);
                                     pala = recortaLetra(palabraAleatoriaa, lett);
                                     if (pala.length() <= 0) {
-                                        JOptionPane.showMessageDialog(null, MessageFormat.format("La suerte te acompaña. Palabra: {0}", palabraAleatoriaa));
-                                        dead = false;
+                                        JOptionPane.showMessageDialog(null, MessageFormat.format("La suerte te acompaña. Palabra: {0}", palabraAleatoria));
+                                        lett.clear();    
+                                        break;
                                     }
                                 }
                         }
                         System.out.println(pala);
+                        System.out.println("SALGO Y PIDO LETRA DE NUEVO");
                     } while(dead);
                     break;
                 case "salir":
@@ -87,14 +101,31 @@ public class Main {
         }
     }
 
-    public static void drawMessage(String palabraAleatoria, int vidas){
-        //Crear mensaje de la palabra
+    public static void drawMessage(String palabraAleatoria, int vidas, ArrayList<String> correctas){
+        // Arrays para la palabra y la palabra en curso
+        ArrayList<Character> adivinar = new ArrayList<Character>();
+        ArrayList<Character> adivinando = new ArrayList<Character>();
+        // Crear mensaje para el popAp
         String mensaje = "";
+
         for(int i = 0; i < palabraAleatoria.length(); i++ ) {
-            mensaje += "__" + " "; 
+            adivinando.add('_');
+            adivinar.add(palabraAleatoria.charAt(i)); 
         }
-        JOptionPane.showMessageDialog(null, MessageFormat.format("Guess: {0}    Vidas: {1}",mensaje, vidas));
+        for(int i = 0; i < adivinar.size(); i++){
+            Character letraaa = adivinar.get(i);
+            if(correctas.contains(letraaa.toString().toLowerCase())){
+                adivinando.set(i, letraaa);
+            }
+        }
+        for(int p = 0; p < adivinando.size(); p++) {
+            mensaje += adivinando.get(p);
+            mensaje += " ";
+        }
+        JOptionPane.showMessageDialog(null, MessageFormat.format("Guess: {0} Vidas: {1}",mensaje, vidas));
+
     }
+
     public static String getLetter(){
         String letra = JOptionPane.showInputDialog("Escriba una letra :");
         return letra;
@@ -116,5 +147,4 @@ public class Main {
         }
         return pala;
     }
-    
 }
