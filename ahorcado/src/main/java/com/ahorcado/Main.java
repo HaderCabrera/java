@@ -16,6 +16,7 @@ public class Main {
 
         // Creamos el array
         ArrayList<String> letters = new ArrayList<String>();
+        ArrayList<String> lett = new ArrayList<String>();
 
         // Agregamos palabras al array
         letters.add("Hola");
@@ -53,17 +54,22 @@ public class Main {
                         boolean exists = buscarLetra(letter, palabraAleatoria);
                         if (!exists) {
                             vidas --;
-                            System.out.println("Menos una vida");
+                            JOptionPane.showMessageDialog(null, MessageFormat.format("Has perdido una vida.Vidas: {0}",vidas));
                             if (vidas < 1){
-                                System.out.println("Eres un loser, try it again.");
+                                JOptionPane.showMessageDialog(null, "No te quedan mas vidad, try again");
                                 dead = false;
                             }
                         } else {
                             String palabraAleatoriaa = palabraAleatoria.toLowerCase();
                             String letterr = letter.toLowerCase();
                                 if(palabraAleatoriaa.contains(letterr)) {
-                                    pala = palabraAleatoriaa.replace(letterr, "");
-
+                                    lett.add(letterr);
+                                    JOptionPane.showMessageDialog(null, MessageFormat.format("letras correctas: {0}", lett));
+                                    pala = recortaLetra(palabraAleatoriaa, lett);
+                                    if (pala.length() <= 0) {
+                                        JOptionPane.showMessageDialog(null, MessageFormat.format("La suerte te acompaña. Palabra: {0}", palabraAleatoriaa));
+                                        dead = false;
+                                    }
                                 }
                         }
                         System.out.println(pala);
@@ -75,6 +81,7 @@ public class Main {
                     break;
                 default:
                     System.out.println("Valor ingresado no valido.");
+                    flag = false;
                     break;
             }
         }
@@ -102,4 +109,12 @@ public class Main {
             return false;
         }
     }
+
+    public static String recortaLetra(String pala, ArrayList<String> letras){
+        for(String item: letras){
+            pala = pala.replace(item, "");
+        }
+        return pala;
+    }
+    
 }
