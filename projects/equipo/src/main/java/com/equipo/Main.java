@@ -1,5 +1,8 @@
 package com.equipo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.equipo.model.entity.Player;
 import com.equipo.model.entity.Team;
 
@@ -18,5 +21,10 @@ public class Main {
         equipo = ctrlTeams.equipos.get("001");
         System.out.println("Mi equipo" + equipo.getNombre());
         System.out.println("JUgador" + equipo.getLstJugadores().get(0).getNombre());
+        List<Player> jugadores = equipo.getLstJugadores();
+        for(Player jugadore : jugadores){
+            System.out.println("Imprimiendo jugadores");
+            System.out.println(jugadore.getNombre());
+        }
     }
 }
