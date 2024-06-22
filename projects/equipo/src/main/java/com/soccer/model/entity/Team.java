@@ -1,6 +1,4 @@
-//trainerleader REPO JHOLVER
-
-package com.equipo.model.entity;
+package com.soccer.model.entity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,11 +7,11 @@ public class Team {
     private String nombre;
     private String ciudad;
     private List<Player> lstJugadores;
-    private List<Coach> lsTEntrenadores;
+    private List<Coach> lstEntrenadores;
     private List<Doctor> lstMasajistas;
     public Team() {
+        lstEntrenadores = new ArrayList<Coach>();
         lstJugadores = new ArrayList<Player>();
-        lsTEntrenadores = new ArrayList<Coach>();
         lstMasajistas = new ArrayList<Doctor>();
     }
     public String getNombre() {
@@ -34,17 +32,20 @@ public class Team {
     public void setLstJugadores(Player player) {
         this.lstJugadores.add(player);
     }
-    public List<Coach> getLsTEntrenadores() {
-        return lsTEntrenadores;
+    public List<Coach> getLstEntrenadores() {
+        return lstEntrenadores;
     }
-    public void setLsTEntrenadores(Coach coach) {
-        this.lsTEntrenadores.add(coach);
+    public void setLstEntrenadores(Coach coach) {
+        this.lstEntrenadores.add(coach);
     }
     public List<Doctor> getLstMasajistas() {
         return lstMasajistas;
     }
-    public void setLstMasajistas(Doctor doctor) {
-        this.lstMasajistas.add(doctor);
+    public void setLstMasajistas(Doctor masajista) {
+        this.lstMasajistas.add(masajista);
     }
+
+    
+
     
 }

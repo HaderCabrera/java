@@ -1,11 +1,11 @@
-package com.equipo.model.entity;
+package com.soccer.model.entity;
 
 public class Person {
     private int id;
     private String nombre;
     private String apellido;
     private int edad;
-    public Person(){
+    public Person() {
     }
     public Person(int id, String nombre, String apellido, int edad) {
         this.id = id;
@@ -37,6 +37,6 @@ public class Person {
     public void setEdad(int edad) {
         this.edad = edad;
     }
+
     
-    
-}   
+}

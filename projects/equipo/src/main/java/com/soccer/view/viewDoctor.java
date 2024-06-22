@@ -1,4 +1,4 @@
-package com.equipo.view;
+package com.soccer.view;
 
 public class viewDoctor {
 

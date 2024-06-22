@@ -1,6 +1,6 @@
-package com.equipo.model.entity;
+package com.soccer.model.entity;
 
-public class Doctor extends Person{
+public class Doctor extends Person {
     private String titulo;
     private int expYear;
     
@@ -25,6 +25,5 @@ public class Doctor extends Person{
     public void setExpYear(int expYear) {
         this.expYear = expYear;
     }
-
     
 }
