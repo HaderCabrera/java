@@ -3,10 +3,13 @@ package com.soccer.view;
 import java.util.Scanner;
 
 import com.soccer.Controller;
+import com.soccer.Main;
 import com.soccer.model.entity.Team;
 
 public class viewTeam {
-    public static Controller controlador;
+    public static Controller controlador; // Variable que uso para
+    //establecer la comunicacion con la instancia del Objeto COntroller
+    //desde MAIN.
     public void start() {
         Scanner scanner = new Scanner(System.in);
 
@@ -23,9 +26,8 @@ public class viewTeam {
             switch (choice) {
                 case 1:
                         Team equipo = new Team();
-                        String codigoEquipo = null;
-                        System.out.println("Ingrese el codigo del equipo :");
-                        codigoEquipo = scanner.nextLine();
+                        int codigoEquipo = Main.generateUniqueKey(controlador.equipos);
+                        System.out.println("PASE EL MAIN");
                         System.out.println("Ingrese Nombre del equipo :");
                         equipo.setNombre(scanner.nextLine());
                         System.out.println("Ingrese la ciudad :");
@@ -34,14 +36,15 @@ public class viewTeam {
                     break;
 
                 case 2:
+                    System.out.println(controlador.equipos.keySet());
 
                     break;
 
                 case 3:
-                    Team eq = new Team();
-                    String codigoE = "001";
-                    eq = controlador.equipos.get(codigoE);
-                    System.out.println("Mi equipo" + eq.getNombre());
+                    //Team eq = new Team();
+                    //String codigoE = "001";
+                    //eq = controlador.equipos.get(codigoE);
+                    //System.out.println("Mi equipo" + eq.getNombre());
                     break;
                 case 4:
 
