@@ -10,7 +10,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Main {
     public static void main(String[] args) {
         Controller ctrlTeams = new Controller();
-        viewTeam.controlador = ctrlTeams;
+        viewTeam.controlador = ctrlTeams;   
         viewTeam vt = new viewTeam();
         vt.start(); 
 
