@@ -45,7 +45,7 @@ public class Team {
         this.lstMasajistas.add(masajista);
     }
 
-    
+    //Obtener valores de un objeto
 
     
 }
