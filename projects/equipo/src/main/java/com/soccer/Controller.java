@@ -1,30 +1,20 @@
 package com.soccer;
 
-import java.util.Enumeration;
+import java.text.MessageFormat;
 import java.util.Hashtable;
 
+import com.soccer.model.entity.Player;
 import com.soccer.model.entity.Team;
 
 public class Controller {
     public Hashtable <Integer,Team> equipos = new Hashtable<>();
+    public Hashtable <Integer, Player> players = new Hashtable<>();
     
     public Team  getTeam(Integer llave){
         Team foundTeam = equipos.get(llave);
         return foundTeam;
     } 
 
-    public void listarEquipo(Integer key){
-        //System.out.println("Nuevo nombre: " + equipos.get(key).getNombre());
-        //System.out.println("Nueva ciudad: " + equipos.get(key).getCiudad());
-    }
-    // Para poder saber las claves que se asignaron al Hashtable
-    // public void getKeys(){
-    //     Enumeration<Integer> llaves = equipos.keys();
-    //     while (llaves.hasMoreElements()) {
-    //         Integer key = llaves.nextElement();
-    //         System.out.println("Llave: " + key);
-    //     }
-    // }
     public Integer findKeyEquipo(String nameEquipo){
         for (Integer key : equipos.keySet()) {
             if (equipos.get(key).getNombre().equals(nameEquipo)) {
@@ -64,6 +54,30 @@ public class Controller {
         } else {
             return p;
         }
+    }
+
+    public void removeTeam(Integer key){
+        Team teamRemove = new Team();
+        String nombre = equipos.get(key).getNombre();
+        teamRemove = equipos.remove(key);
+        if (teamRemove != null) {
+            System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+            System.out.println(MessageFormat.format("Team {0} has been remove succesfully.", nombre.toUpperCase() ));
+            System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"); 
+        }
+    }
+
+    public void showTeams(){
+        System.out.println("==============================================");
+        equipos.values().forEach(team -> {
+            System.out.println("\tName:   \t" + team.getNombre());
+            System.out.println("\tCity:   \t" + team.getCiudad());
+            System.out.println("\tJugadores: \t" + team.getLstJugadores());
+            System.out.println("\tTrainers: \t" + team.getLstEntrenadores());
+            System.out.println("\tDoctors: \t" + team.getLstMasajistas());
+            System.out.println("______________________________________________");
+        });
+        System.out.println("==============================================");
     }
 
 }
