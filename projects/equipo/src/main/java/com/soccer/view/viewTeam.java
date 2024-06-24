@@ -33,7 +33,7 @@ public class viewTeam {
                 switch (choice) {
                     case 1:
                         System.out.println("\t");
-                        int codigoEquipo = Main.generateUniqueKey(controlador.equipos);
+
                         System.out.print("Team name: ");
                         String teamName = scanner.nextLine();
                         equipo.setNombre(teamName);
@@ -41,82 +41,83 @@ public class viewTeam {
                         System.out.print("Team city: ");
                         String teamCity = scanner.nextLine();
                         equipo.setCiudad(teamCity);
-    
+                        int codigoEquipo = Main.generateUniqueKey(controlador.equipos);
                         controlador.equipos.put(codigoEquipo, equipo);
                         break;
     
                     case 2:
-    
-                    if (controlador.equipos.size() > 0 ) { 
-                        controlador.getKeys();
-                        System.out.print("Ingrese el ID del equipo que quiere modificar: ");
-                        Integer key = scanner.nextInt();
-                        boolean flag = controlador.checkExistence(key);
-                        if (flag == false) {
-                            System.out.println("\t");
-                            System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-                            System.out.println("¡There isn't a team whit that ID!");
-                            System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-                            break;
-                        }
-                        while (flag) {
-                            //
-                            String nameTeam = controlador.getNombre(key);
-                            System.out.println("\t");
-                            System.out.println(MessageFormat.format("       {0}", nameTeam.toUpperCase()));
-                            System.out.println("___________________________");
-                            System.out.println("1. Editar nombre");
-                            System.out.println("2. Editar ciudad");
-                            System.out.println("3. Editar jugadores (N/D)");
-                            System.out.println("4. Editar entrenadores (N/D)");
-                            System.out.println("5. Editar doctores (N/D)");
-                            System.out.println("6. Salir");
-                            System.out.println("=============================");
-                            System.out.print("Elija una opción: ");
-                            int choice2 = scanner.nextInt();
-                            scanner.nextLine(); // Consume newline   
-                                switch (choice2) {
-                                    case 1:
-                                        System.out.println("\t");  
-                                        System.out.print("New team name: ");
-                                        String newName = scanner.nextLine();
-                                        controlador.setNombre(key, newName);
-                                        controlador.listarEquipo(key);
-                                        break;
-                                    case 2:
-                                        System.out.println("\t"); 
-                                        System.out.print("New team city: ");
-                                        String newCity = scanner.nextLine();
-                                        controlador.setCity(key, newCity);
-                                        controlador.listarEquipo(key);
-                                        break;
-                                    case 3:
+
+                        if (controlador.equipos.size() > 0 ) { 
+                            //controlador.getKeys(); // CAMBIANDO PARAMETRO DE ENTRADA A NOMBREEQUIPO
+                            System.out.print("Ingrese el nombre del equipo que quiere modificar: ");
+                            String nombre = scanner.nextLine();
+                            Integer key = controlador.findKeyEquipo(nombre);
+                            if (key == null) {
+                                System.out.println("\t");
+                                System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+                                System.out.println("¡There isn't a team whit that name!");
+                                System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+                                continue;
+                            }
+                            boolean flag = controlador.checkExistence(key);
+
+                            while (flag) {
+                                //
+                                String nameTeam = controlador.getNombre(key);
+                                System.out.println("\t");
+                                System.out.println(MessageFormat.format("       {0}", nameTeam.toUpperCase()));
+                                System.out.println("___________________________");
+                                System.out.println("1. Editar nombre");
+                                System.out.println("2. Editar ciudad");
+                                System.out.println("3. Editar jugadores (N/D)");
+                                System.out.println("4. Editar entrenadores (N/D)");
+                                System.out.println("5. Editar doctores (N/D)");
+                                System.out.println("6. Salir");
+                                System.out.println("=============================");
+                                System.out.print("Elija una opción: ");
+                                int choice2 = scanner.nextInt();
+                                scanner.nextLine(); // Consume newline   
+                                    switch (choice2) {
+                                        case 1:
+                                            System.out.println("\t");  
+                                            System.out.print("New team name: ");
+                                            String newName = scanner.nextLine();
+                                            controlador.setNombre(key, newName);
+                                            controlador.listarEquipo(key);
+                                            break;
+                                        case 2:
+                                            System.out.println("\t"); 
+                                            System.out.print("New team city: ");
+                                            String newCity = scanner.nextLine();
+                                            controlador.setCity(key, newCity);
+                                            controlador.listarEquipo(key);
+                                            break;
+                                        case 3:
+                                        
+                                            break;
+        
+                                        case 6:
+                                            flag = false;
+                                            break;
                                     
-                                        break;
-    
-                                    case 6:
-                                        flag = false;
-                                        break;
-                                
-                                    default:
-                                        System.out.println("\t");
-                                        System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-                                        System.out.println("¡Opcion invalida, intentelo de nuevo!");
-                                        System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-                                        break;
-                                }  
+                                        default:
+                                            System.out.println("\t");
+                                            System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+                                            System.out.println("¡Opcion invalida, intentelo de nuevo!");
+                                            System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+                                            break;
+                                    }  
+                            }
+                        } else {
+                            System.out.println("\t");
+                            System.out.println("@@@@@@@@@@@@@@@@@@");
+                            System.out.println("¡Not teams yet!");
+                            System.out.println("@@@@@@@@@@@@@@@@@@");
                         }
-                    } else {
-                        System.out.println("\t");
-                        System.out.println("@@@@@@@@@@@@@@@@@@");
-                        System.out.println("¡Not teams yet!");
-                        System.out.println("@@@@@@@@@@@@@@@@@@");
-                    }
-                    break;
+                        break;
                     case 3:
                         if (controlador.equipos.size() > 0) {
-                            controlador.getKeys();
-                            System.out.print("Indique el ID del equipo: ");
+                            System.out.print("Indique el nombre del equipo: ");
                             Integer choice3 = scanner.nextInt();
                             scanner.nextLine();
                             if (controlador.checkExistence(choice3)) {

@@ -18,18 +18,25 @@ public class Controller {
         //System.out.println("Nueva ciudad: " + equipos.get(key).getCiudad());
     }
     // Para poder saber las claves que se asignaron al Hashtable
-    public void getKeys(){
-        Enumeration<Integer> llaves = equipos.keys();
-        while (llaves.hasMoreElements()) {
-            Integer key = llaves.nextElement();
-            System.out.println("Llave: " + key);
+    // public void getKeys(){
+    //     Enumeration<Integer> llaves = equipos.keys();
+    //     while (llaves.hasMoreElements()) {
+    //         Integer key = llaves.nextElement();
+    //         System.out.println("Llave: " + key);
+    //     }
+    // }
+    public Integer findKeyEquipo(String nameEquipo){
+        for (Integer key : equipos.keySet()) {
+            if (equipos.get(key).getNombre().equals(nameEquipo)) {
+                return key;
+            }
         }
+        return null;
     }
 
     public boolean checkExistence(Integer key){
         Team foundTeam = equipos.get(key);
         if(foundTeam == null) {
-
             return false;
         } else {
             return true;
