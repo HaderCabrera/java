@@ -11,6 +11,15 @@ import com.soccer.view.viewTeam;
 import java.util.concurrent.ThreadLocalRandom;
 public class Main {
     public static void main(String[] args) {
+        // Para acceder a vista d econtroladores
+        Controller ctrlTeams = new Controller();
+        viewTeam.controlador1 = ctrlTeams;   
+
+        // Para acceder a vista d econtroladores
+        Controller ctrlPlayer = new Controller();
+        viewPlayer.controlador = ctrlPlayer;  
+
+
         boolean flag = true;
         Scanner scannerm = new Scanner(System.in); 
         System.out.println("SALI DEL WHILE");
@@ -30,16 +39,11 @@ public class Main {
                 scannerm.nextLine(); // Consume newline
                 switch (choice) {
                     case 1:
-                        // Para acceder a vista d econtroladores
-                        Controller ctrlTeams = new Controller();
-                        viewTeam.controlador = ctrlTeams;   
                         viewTeam vt = new viewTeam();
                         vt.start(scannerm);
                         break;
                     case 2:
-                        // Para acceder a vista d econtroladores
-                        Controller ctrlPlayer = new Controller();
-                        viewTeam.controlador = ctrlPlayer;   
+ 
                         viewPlayer vp = new viewPlayer();
                         vp.start(scannerm);
                         break;
@@ -76,9 +80,9 @@ public class Main {
     // LLave unica para Jugadores
     public static int generateUniqueKey(Hashtable<Integer, Player> hashtable){
         do {
-            int randomInt = ThreadLocalRandom.current().nextInt(0, 100);
-            if(!hashtable.containsKey(randomInt)) {
-                return randomInt;
+            int randomInt2 = ThreadLocalRandom.current().nextInt(0, 100);
+            if(!hashtable.containsKey(randomInt2)) {
+                return randomInt2;
             }
         } while (true);
     }

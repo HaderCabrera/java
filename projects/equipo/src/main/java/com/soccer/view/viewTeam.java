@@ -1,14 +1,15 @@
-    package com.soccer.view;
+package com.soccer.view;
 
 import java.text.MessageFormat;
 import java.util.Scanner;
 
 import com.soccer.Controller;
 import com.soccer.Main;
+import com.soccer.model.entity.Player;
 import com.soccer.model.entity.Team;
 
 public class viewTeam {
-    public static Controller controlador; // Variable que uso para
+    public static Controller controlador1;// Variable que uso para
     //Controller controlador = new Controller();
     //establecer la comunicacion con la instancia del Objeto COntroller
     //desde MAIN.
@@ -16,7 +17,6 @@ public class viewTeam {
         //Scanner scanner = new Scanner(System.in);
         boolean flagE = true;
         while (flagE) {
-            controlador.equipos.
             System.out.println("\t");
             System.out.println("  Team Administration");
             System.out.println("___________________________");
@@ -24,7 +24,7 @@ public class viewTeam {
             System.out.println("2. Update Team");
             System.out.println("3. Search Team");
             System.out.println("4. Remove Team");
-            System.out.println("5. Show Team");
+            System.out.println("5. Show Teams");
             System.out.println("6. Exit.");
             System.out.println("===========================");
             System.out.print("Choose an option: ");
@@ -43,16 +43,18 @@ public class viewTeam {
                         System.out.print("Team city: ");
                         String teamCity = scanner.nextLine();
                         equipo.setCiudad(teamCity);
-                        int codigoEquipo = Main.generateUniqueKeyT(controlador.equipos);
-                        controlador.equipos.put(codigoEquipo, equipo);
+                        int codigoEquipo = Main.generateUniqueKeyT(controlador1.equipos);
+                        controlador1.equipos.put(codigoEquipo, equipo);
+                        //añaniendo comuinicacion al controlador de viewPLayer
+                        viewPlayer.controlador.equipos.put(codigoEquipo, equipo);
                         break;
     
                     case 2:
 
-                        if (controlador.equipos.size() > 0 ) { 
+                        if (controlador1.equipos.size() > 0 ) { 
                             System.out.print("Ingrese el nombre del equipo que quiere modificar: ");
                             String nombre = scanner.nextLine();
-                            Integer key = controlador.findKeyEquipo(nombre);
+                            Integer key = controlador1.findKeyEquipo(nombre);
                             if (key == null) {
                                 System.out.println("\t");
                                 System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
@@ -60,17 +62,17 @@ public class viewTeam {
                                 System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
                                 continue;
                             }
-                            boolean flag = controlador.checkExistence(key);
+                            boolean flag = controlador1.checkExistence(key);
 
                             while (flag) {
                                 //
-                                String nameTeam = controlador.getNombre(key);
+                                String nameTeam = controlador1.getNombre(key);
                                 System.out.println("\t");
                                 System.out.println(MessageFormat.format("       {0}", nameTeam.toUpperCase()));
                                 System.out.println("___________________________");
                                 System.out.println("1. Editar nombre");
                                 System.out.println("2. Editar ciudad");
-                                System.out.println("3. Agregar jugadores (N/D)");
+                                System.out.println("3. Agregar jugador");
                                 System.out.println("4. Agregar entrenadores (N/D)");
                                 System.out.println("5. Agregar doctores (N/D)");
                                 System.out.println("6. Salir");
@@ -83,16 +85,29 @@ public class viewTeam {
                                             System.out.println("\t");  
                                             System.out.print("New team name: ");
                                             String newName = scanner.nextLine();
-                                            controlador.setNombre(key, newName);
+                                            controlador1.setNombre(key, newName);
                                             break;
                                         case 2:
                                             System.out.println("\t"); 
                                             System.out.print("New team city: ");
                                             String newCity = scanner.nextLine();
-                                            controlador.setCity(key, newCity);
+                                            controlador1.setCity(key, newCity);
                                             break;
                                         case 3:
-                                        
+                                            if (controlador1.players.size() > 0) {
+                                                System.out.print("Enter the name's player to add: ");
+                                                String playerAdd = scanner.nextLine();
+                                                Integer keyP = controlador1.findKeyPlayer(playerAdd);
+                                                if (keyP != null) {
+                                                    Player addPlayer = controlador1.players.get(keyP);
+                                                    controlador1.equipos.get(key).setLstJugadores(addPlayer);
+                                                }     
+                                            } else {
+                                                System.out.println("\t");
+                                                System.out.println("@@@@@@@@@@@@@@@@@@");
+                                                System.out.println("¡Not players yet!");
+                                                System.out.println("@@@@@@@@@@@@@@@@@@");
+                                            }
                                             break;
         
                                         case 6:
@@ -115,13 +130,13 @@ public class viewTeam {
                         }
                         break;
                     case 3:
-                        if (controlador.equipos.size() > 0) {
+                        if (controlador1.equipos.size() > 0) {
 
                             System.out.print("Ingrese el nombre del equipo que quiere modificar: ");
                             String nombre = scanner.nextLine();
-                            Integer key = controlador.findKeyEquipo(nombre);
+                            Integer key = controlador1.findKeyEquipo(nombre);
                             if (key != null) {
-                                Team findTeam = controlador.equipos.get(key);
+                                Team findTeam = controlador1.equipos.get(key);
                                 String name = findTeam.getNombre();
                                 String city = findTeam.getCiudad();
                                 int players = findTeam.getLstJugadores().size();
@@ -152,13 +167,13 @@ public class viewTeam {
                         break;
     
                     case 4:
-                        if (controlador.equipos.size() > 0) {
+                        if (controlador1.equipos.size() > 0) {
                             System.out.print("Ingrese el nombre del equipo que quiere eliminar: ");
                             String nameEquipo = scanner.nextLine();
-                            Integer key = controlador.findKeyEquipo(nameEquipo);
+                            Integer key = controlador1.findKeyEquipo(nameEquipo);
 
                             if (key != null) {
-                                controlador.removeTeam(key);
+                                controlador1.removeTeam(key);
                             }
                         } else {
                             System.out.println("\t");
@@ -169,8 +184,8 @@ public class viewTeam {
                         break;
     
                     case 5:
-                        if (controlador.equipos.size() != 0) {
-                            controlador.showTeams();
+                        if (controlador1.equipos.size() != 0) {
+                            controlador1.showTeams();
                         }
                         break;
     
@@ -189,7 +204,7 @@ public class viewTeam {
             } catch (java.util.InputMismatchException e) {
                 System.out.println("\t");
                 System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-                System.out.println("   ¡Invalid input, enter a number!");
+                System.out.println(e);
                 System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
                 scanner.next();
             }
