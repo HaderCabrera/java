@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
+import javax.swing.text.View;
+
 import com.soccer.Controller;
 import com.soccer.Main;
 import com.soccer.model.entity.Player;
@@ -65,6 +67,10 @@ public class viewPlayer {
 
                         controlador.players.put(codigoPlayer, player);
                         viewTeam.controlador1.players.put(codigoPlayer, player);
+
+                        System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+                        System.out.println(MessageFormat.format("Player {0} has been added succesfully.", controlador.players.get(codigoPlayer).getNombre()));
+                        System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"); 
 
                         break;
     
@@ -193,32 +199,37 @@ public class viewPlayer {
     
                     case 4:
                         if (controlador.players.size() > 0) {
+
                             System.out.print("Ingrese el nombre del player que quiere eliminar: ");
                             String namePlayerP = scanner.nextLine();
                             Integer key = controlador.findKeyPlayer(namePlayerP);
-
-
-
-                            // ->>>>>>>>< VERIFICAR COMO ESTOY RECORRIENDO LA LISTA DE JUGADORES DE VOEW TEAM
-                            // CON LA LLAVE QUE ME RETORNA EL METODO DE BUCAR LLAVE DE EQUIPO CON JUGADOR
-                            //EL PROBLEMA ESTA ACA, EN EL CONTROLLER SI SE ESTA ENCONTRANDO LA LLAVE CORRECTA
-
-
                             if (key != null) {
-                                Integer llaveTeamPlayer = controlador.buscarEquipoPlayer(namePlayerP);
-                                Team equipoMod = viewTeam.controlador1.equipos.get(llaveTeamPlayer);
-
-                                // Iterar sobre la lista de jugadores
-                                for (int i = 0; i < equipoMod.getLstJugadores().size() ; i++) {
-                                    Player jugador = equipoMod.getLstJugadores().get(i);
-                                    if (jugador.getNombre().equals(namePlayerP)) {
-                                        // Si encontramos el jugador por nombre, lo eliminamos
-                                        equipoMod.getLstJugadores().remove(i);
-                                         // Terminar la función después de eliminar
-                                    }
-                                }
                                 controlador.removePlayer(key);
-
+                                //Iterando PlayerControler para eliminar jugador de equipo
+                                viewTeam.controlador1.equipos.values().forEach(equipoMod ->{
+                                    // Iterar sobre la lista de jugadores
+                                    for (int i = 0; i < equipoMod.getLstJugadores().size() ; i++) {
+                                        Player jugador = equipoMod.getLstJugadores().get(i);
+                                        if (jugador.getNombre().equals(namePlayerP)) {
+                                            // Si encontramos el jugador por nombre, lo eliminamos
+                                            equipoMod.getLstJugadores().remove(i);
+                                        }
+                                    }
+                                });
+                                //Iterando PlayerControler para eliminar jugador de equipo
+                                viewTeam.controlador1.players.values().forEach(playerMod ->{
+                                    if (playerMod.getNombre().equals(namePlayerP)) {
+                                        viewTeam.controlador1.players.remove(playerMod.getId());
+                                    }
+                                });
+                                System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+                                System.out.println("Player wasremoved from Team/Player ");
+                                System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"); 
+                            } else {
+                                System.out.println("\t");
+                                System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+                                System.out.println("¡There isn't a player whith that name!");
+                                System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");  
                             }
                         } else {
                             System.out.println("\t");
@@ -254,7 +265,7 @@ public class viewPlayer {
             } catch (java.util.InputMismatchException e) {
                 System.out.println("\t");
                 System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-                System.out.println("   ¡Invalid input, enter a number! PLAYER");
+                System.out.println("   ¡Error deteted, veryfy you input!");
                 System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
                 scanner.next();
             }
