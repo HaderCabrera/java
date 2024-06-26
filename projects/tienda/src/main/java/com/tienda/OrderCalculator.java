@@ -1,4 +1,4 @@
-package com.tienda;
+    package com.tienda;
 
 class OrderCalculator {
     public double calculateTotal(Order order) {
