@@ -7,8 +7,8 @@ import com.ligabetplay.controller.ControllerDate;
 import com.ligabetplay.controller.Keyunique;
 import com.ligabetplay.model.entity.Equipo;
 
-public class viewEquipos {
-    public static void gestorEquipos(){
+public class viewJugadores {
+    public static void gestorJugadores(){
         ControllerDate controlador = new ControllerDate();
         Scanner scanner = new Scanner(System.in);
         // Menú de opciones
@@ -206,6 +206,4 @@ public class viewEquipos {
         } 
         
     }
-
-}  
-
+}

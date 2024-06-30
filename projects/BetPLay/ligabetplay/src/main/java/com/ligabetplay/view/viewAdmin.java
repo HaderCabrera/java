@@ -38,10 +38,10 @@ public class viewAdmin {
                     contador = 1;
                     switch (opcion) {
                         case 1:
-                            //agregarTarea(archivo, nuevaTarea);
+                            viewEquipos.gestorEquipos();
                             break;
                         case 2:
-                            //listarTareas(archivo);
+                            viewJugadores.gestorJugadores();
                             break;
                         case 3:
 
@@ -65,7 +65,7 @@ public class viewAdmin {
                     System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
                     scanner.nextLine();
                 } 
-        } 
+        }
         
     }
 }

@@ -1,22 +1,35 @@
 package com.ligabetplay.model.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Equipo {
-    private Long id;
+    private Integer id;
     private String nombre;
     private String ciudad;
     private String estadio;
     private String entrenador;
     private List<Jugador> jugadores;
     private List<Partido> partidos;
-
+    
     // Getters y setters
     
-    public Long getId() {
+    public Equipo(Integer id, String nombre, String ciudad, String estadio, String entrenador) {
+        this.id = id;
+        this.nombre = nombre;
+        this.ciudad = ciudad;
+        this.estadio = estadio;
+        this.entrenador = entrenador;
+    }   
+    public Equipo() {
+        jugadores = new ArrayList<Jugador>();
+        partidos = new ArrayList<Partido>();
+
+    }
+    public Integer getId() {
         return id;
     }
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
     public String getNombre() {
@@ -56,6 +69,5 @@ public class Equipo {
         this.partidos = partidos;
     }
 
-    // Getters y setters
     
 }

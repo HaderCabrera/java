@@ -1,17 +1,14 @@
 package com.soccer.view;
 
 import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+
 import java.util.Scanner;
 
-import javax.swing.text.View;
 
 import com.soccer.Controller;
 import com.soccer.Main;
 import com.soccer.model.entity.Player;
-import com.soccer.model.entity.Team;
+
 
 public class viewPlayer {
     public static Controller controlador;// Variable que uso para
