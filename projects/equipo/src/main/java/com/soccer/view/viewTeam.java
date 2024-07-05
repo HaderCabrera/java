@@ -16,7 +16,7 @@ public class viewTeam {
     public void start(Scanner scanner) {
         //Scanner scanner = new Scanner(System.in);
         boolean flagE = true;
-        while (flagE) {
+        while (flagE) { 
             System.out.println("\t");
             System.out.println("  Team Administration");
             System.out.println("___________________________");
