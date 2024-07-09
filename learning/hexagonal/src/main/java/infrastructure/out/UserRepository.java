@@ -58,4 +58,9 @@ public class UserRepository implements UserService {
         return user;
     }
 
+    @Override
+    public void updateUser(User user) {
+        //UPDATE
+    }
+
 }
