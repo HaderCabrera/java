@@ -1,18 +1,31 @@
 package infrastructure.in;
 
 import application.CreateUserUseCase;
+import application.FindUserUseCase;
+import application.RemoveUserUseCase;
 import application.UpdateUserUseCase;
 import domain.entity.User;
+
+import java.text.MessageFormat;
 import java.util.Scanner;
+
+import com.google.protobuf.Message;
 
 public class UserController {
     private  CreateUserUseCase createUserUseCase;
     private UpdateUserUseCase updateUserUseCase;
+    private RemoveUserUseCase removeUserUseCase;
+    private FindUserUseCase findUserUseCase;
+    
 
-    public UserController(CreateUserUseCase createUserUseCase, UpdateUserUseCase updateUserUseCase) {
+    public UserController(CreateUserUseCase createUserUseCase, UpdateUserUseCase updateUserUseCase,
+            RemoveUserUseCase removeUserUseCase, FindUserUseCase findUserUseCase) {
         this.createUserUseCase = createUserUseCase;
         this.updateUserUseCase = updateUserUseCase;
+        this.removeUserUseCase = removeUserUseCase;
+        this.findUserUseCase = findUserUseCase;
     }
+
 
     public void start() {
         boolean salir = false;
@@ -46,13 +59,41 @@ public class UserController {
                         break;
                     case 2:
                         //UPDATE
-                        
+                        System.out.println("Enter user id: ");
+                        Long id = scanner.nextLong();
+                        scanner.nextLine();
+
+                        System.out.println("Enter new user name: ");
+                        String newName = scanner.nextLine();
+
+                        System.out.println("Enter new user email: ");
+                        String newEmail = scanner.nextLine();
+
+                        User newUser = new User();
+                        newUser.setId(id);
+                        newUser.setEmail(newEmail);
+                        newUser.setName(newName);
+
+                        updateUserUseCase.execute(newUser);
+
+                        System.out.println("Update succesfully!");
                         break;
+
                     case 3:
                         //DELETE
+                        System.out.println("Enter user id to remove: ");
+                        Long removeId = scanner.nextLong();
+                        scanner.nextLine();
+
+                        removeUserUseCase.execute(removeId);
+                        
                         break;
                     case 4:
-                        //FIND
+                        System.out.println("Enter user id: ");
+                        Long findId = scanner.nextLong();
+                        scanner.nextLine();
+                        User findUser = findUserUseCase.execute(findId);
+                        System.out.println(MessageFormat.format("Name: {0}, email: {1}",findUser.getName(),findUser.getEmail()));
                         break;
                     case 5:
                         System.out.println("Saliendo...");
@@ -62,9 +103,8 @@ public class UserController {
                         System.out.println("Opción no válida, por favor elige una opción entre 1 y 4");
                 }
             } catch (Exception e) {
-                System.out.println("Ha ocurrido un error inesperado: " + e.getMessage());
+                System.out.println("Ha ocurrido un error inesperado: " + e);
             }
-            scanner.close();
         }
 
     }
