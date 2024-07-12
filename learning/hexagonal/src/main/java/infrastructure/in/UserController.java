@@ -9,7 +9,6 @@ import domain.entity.User;
 import java.text.MessageFormat;
 import java.util.Scanner;
 
-import com.google.protobuf.Message;
 
 public class UserController {
     private  CreateUserUseCase createUserUseCase;
